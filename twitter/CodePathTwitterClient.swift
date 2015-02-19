@@ -32,10 +32,12 @@ class CodePathTwitterClient: BDBOAuth1RequestOperationManager {
     
         //fetch request token and redirect to auth page
         CodePathTwitterClient.Instance.requestSerializer.removeAccessToken()
+        
         CodePathTwitterClient.Instance.fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "cptwitterdemo://oauth"), scope: nil, success: {(requestToken:BDBOAuth1Credential!) -> Void in
             println("Got the request token")
             var authURLString = valueForAPIKey(keyname: "AuthURL")
             var authURL = NSURL(string: authURLString + requestToken.token)
+            println(authURLString + requestToken.token)
             UIApplication.sharedApplication().openURL(authURL!)
             }) {(error: NSError!) -> Void in
                 println("Failed to get the request token")

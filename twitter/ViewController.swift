@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Social
+import Accounts
 
 class ViewController: UIViewController {
 
@@ -14,7 +16,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     
-    
+        /*var accountStore = ACAccountStore()
+        var act = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+        var acc  = ACAccount(accountType: act)
+        accountStore.requestAccessToAccountsWithType(act, options: nil,  completion: <#ACAccountStoreRequestAccessCompletionHandler!##(Bool, NSError!) -> Void#>)
+        println(acc)
+        */
     }
 
     override func didReceiveMemoryWarning() {

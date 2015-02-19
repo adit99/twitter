@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BaseURL</key>
-	<string>https://api.twitter.com</string>
+	<string>https://api.twitter.com/</string>
 	<key>AuthURL</key>
 	<string>https://api.twitter.com/oauth/authorize?oauth_token=</string>
 	<key>ConsumerSecret</key>

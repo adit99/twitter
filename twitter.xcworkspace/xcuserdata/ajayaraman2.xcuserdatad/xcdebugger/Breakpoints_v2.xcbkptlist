@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "twitter/ViewController.swift"
-            timestampString = "445932977.275566"
+            timestampString = "446065526.204359"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "onLogin(_:)"
             landmarkType = "5">
          </BreakpointContent>

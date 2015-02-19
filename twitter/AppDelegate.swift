@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        println("didfinishlaunching")
         return true
+    
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -43,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annoation: AnyObject?) -> Bool {
         
-        println("hi")
+        println("in app delegate")
         CodePathTwitterClient.Instance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: {(accessToken: BDBOAuth1Credential!) -> Void in
             
             println("got the access token")

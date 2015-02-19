@@ -18,6 +18,8 @@
 		BE2454EE1A94371800E1D31F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE2454ED1A94371800E1D31F /* Images.xcassets */; };
 		BE2454F11A94371800E1D31F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2454EF1A94371800E1D31F /* LaunchScreen.xib */; };
 		BE2454FD1A94371800E1D31F /* twitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2454FC1A94371800E1D31F /* twitterTests.swift */; };
+		BECE35A81A9647DE0062A667 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE138E0F1A94422F00BEA675 /* Accounts.framework */; };
+		BECE35A91A9647E40062A667 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE138E0D1A94414B00BEA675 /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BECE35A91A9647E40062A667 /* Social.framework in Frameworks */,
+				BECE35A81A9647DE0062A667 /* Accounts.framework in Frameworks */,
 				1EDDE841BDF1F721ADA947D1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +440,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = twitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "twitter/twitter-Bridging-Header.h";
@@ -450,6 +455,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = twitter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "twitter/twitter-Bridging-Header.h";
