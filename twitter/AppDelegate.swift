@@ -12,13 +12,31 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        println("didfinishlaunching")
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: valueForAPIKey(keyname: "userDidLogout"), object: nil)
+        
+        if User.currentUser != nil {
+            println("current user detected")
+            var tvc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
+            let navigationController = UINavigationController(rootViewController: tvc)
+            window?.rootViewController = navigationController
+        }
+        
+        var navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.whiteColor()  // Back buttons and such
+        navigationBarAppearace.barTintColor = UIColor(CIColor: CIColor(red: 85/255, green: 172/255, blue: 238/255))
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        
+        //force loading of image assets
+        SVProgressHUD.show()
+        ImageAssets.Instance
+        SVProgressHUD.dismiss()
+        
         return true
-    
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -43,25 +61,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annoation: AnyObject?) -> Bool {
-        
-        println("in app delegate")
-        CodePathTwitterClient.Instance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: {(accessToken: BDBOAuth1Credential!) -> Void in
-            
-            println("got the access token")
-            CodePathTwitterClient.Instance.requestSerializer.saveAccessToken(accessToken)
-            
-            CodePathTwitterClient.Instance.GET("1.1/account/verify_credentials.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                var user = User(dictionary:response as NSDictionary)
-                println("\(user.name)")
-                }, failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                    println("failed to get user")
-                })
-            }) { (error: NSError!) -> Void in
-                println("failed to get access token")
-        }
-
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+   
+        CodePathTwitterClient.Instance.openURL(url)
         return true
+    }
+
+    func userDidLogout() {
+        var vc = storyboard.instantiateInitialViewController() as UIViewController
+        let navigationController = UINavigationController(rootViewController: vc)
+        self.window?.rootViewController = navigationController
     }
 }
 

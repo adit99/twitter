@@ -18,6 +18,11 @@
 		BE2454EE1A94371800E1D31F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE2454ED1A94371800E1D31F /* Images.xcassets */; };
 		BE2454F11A94371800E1D31F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2454EF1A94371800E1D31F /* LaunchScreen.xib */; };
 		BE2454FD1A94371800E1D31F /* twitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2454FC1A94371800E1D31F /* twitterTests.swift */; };
+		BEA0BEEC1A96FD090036C45C /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0BEEB1A96FD090036C45C /* TweetsViewController.swift */; };
+		BEA0BEF01A970BB60036C45C /* TweetViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0BEEE1A970BB60036C45C /* TweetViewCell.swift */; };
+		BEA0BEF11A970BB60036C45C /* TweetViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA0BEEF1A970BB60036C45C /* TweetViewCell.xib */; };
+		BEA0BEF51A9901D50036C45C /* blue-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA0BEF41A9901D50036C45C /* blue-bird.png */; };
+		BEA0BEF71A990A7C0036C45C /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0BEF61A990A7C0036C45C /* Images.swift */; };
 		BECE35A81A9647DE0062A667 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE138E0F1A94422F00BEA675 /* Accounts.framework */; };
 		BECE35A91A9647E40062A667 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE138E0D1A94414B00BEA675 /* Social.framework */; };
 /* End PBXBuildFile section */
@@ -52,6 +57,11 @@
 		BE2454F61A94371800E1D31F /* twitterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = twitterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2454FB1A94371800E1D31F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2454FC1A94371800E1D31F /* twitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = twitterTests.swift; sourceTree = "<group>"; };
+		BEA0BEEB1A96FD090036C45C /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
+		BEA0BEEE1A970BB60036C45C /* TweetViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewCell.swift; sourceTree = "<group>"; };
+		BEA0BEEF1A970BB60036C45C /* TweetViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetViewCell.xib; sourceTree = "<group>"; };
+		BEA0BEF41A9901D50036C45C /* blue-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue-bird.png"; sourceTree = "<group>"; };
+		BEA0BEF61A990A7C0036C45C /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		DCF170C5E98F5C642B00B6CD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -98,6 +108,7 @@
 			children = (
 				BE138E121A94549800BEA675 /* User.swift */,
 				BE138E141A9454A800BEA675 /* Tweet.swift */,
+				BEA0BEF61A990A7C0036C45C /* Images.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -105,6 +116,7 @@
 		BE2454D81A94371800E1D31F = {
 			isa = PBXGroup;
 			children = (
+				BEA0BEF41A9901D50036C45C /* blue-bird.png */,
 				BE2454E31A94371800E1D31F /* twitter */,
 				BE2454F91A94371800E1D31F /* twitterTests */,
 				BE2454E21A94371800E1D31F /* Products */,
@@ -125,10 +137,11 @@
 		BE2454E31A94371800E1D31F /* twitter */ = {
 			isa = PBXGroup;
 			children = (
+				BEA0BEED1A970BA20036C45C /* Views */,
+				BEA0BEEA1A96FCEB0036C45C /* Controllers */,
 				BE138E111A94548600BEA675 /* Models */,
 				BE138E081A94389500BEA675 /* API */,
 				BE2454E61A94371800E1D31F /* AppDelegate.swift */,
-				BE2454E81A94371800E1D31F /* ViewController.swift */,
 				BE2454EA1A94371800E1D31F /* Main.storyboard */,
 				BE2454ED1A94371800E1D31F /* Images.xcassets */,
 				BE2454EF1A94371800E1D31F /* LaunchScreen.xib */,
@@ -162,6 +175,24 @@
 				BE2454FB1A94371800E1D31F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEA0BEEA1A96FCEB0036C45C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE2454E81A94371800E1D31F /* ViewController.swift */,
+				BEA0BEEB1A96FD090036C45C /* TweetsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BEA0BEED1A970BA20036C45C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BEA0BEEE1A970BB60036C45C /* TweetViewCell.swift */,
+				BEA0BEEF1A970BB60036C45C /* TweetViewCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		E5F8C7FF8231EB364207975E /* Frameworks */ = {
@@ -258,7 +289,9 @@
 			files = (
 				BE138E0C1A943B5000BEA675 /* Environments.plist in Resources */,
 				BE2454EC1A94371800E1D31F /* Main.storyboard in Resources */,
+				BEA0BEF51A9901D50036C45C /* blue-bird.png in Resources */,
 				BE2454F11A94371800E1D31F /* LaunchScreen.xib in Resources */,
+				BEA0BEF11A970BB60036C45C /* TweetViewCell.xib in Resources */,
 				BE2454EE1A94371800E1D31F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,7 +345,10 @@
 			files = (
 				BE138E131A94549800BEA675 /* User.swift in Sources */,
 				BE138E151A9454A800BEA675 /* Tweet.swift in Sources */,
+				BEA0BEEC1A96FD090036C45C /* TweetsViewController.swift in Sources */,
+				BEA0BEF01A970BB60036C45C /* TweetViewCell.swift in Sources */,
 				BE2454E91A94371800E1D31F /* ViewController.swift in Sources */,
+				BEA0BEF71A990A7C0036C45C /* Images.swift in Sources */,
 				BE2454E71A94371800E1D31F /* AppDelegate.swift in Sources */,
 				BE138E0A1A9438D400BEA675 /* CodePathTwitterClient.swift in Sources */,
 			);
@@ -440,7 +476,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = twitter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "twitter/twitter-Bridging-Header.h";
@@ -455,7 +491,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = twitter/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "twitter/twitter-Bridging-Header.h";

@@ -14,14 +14,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    
-        /*var accountStore = ACAccountStore()
-        var act = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-        var acc  = ACAccount(accountType: act)
-        accountStore.requestAccessToAccountsWithType(act, options: nil,  completion: <#ACAccountStoreRequestAccessCompletionHandler!##(Bool, NSError!) -> Void#>)
-        println(acc)
-        */
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +25,7 @@ class ViewController: UIViewController {
         CodePathTwitterClient.Instance.loginWithCompletion() {
             (user: User?, error: NSError?) in
             if user != nil {
-                //perform segway
+                self.performSegueWithIdentifier("gotohome", sender: self)
             } else {
                 //handle login error
             }

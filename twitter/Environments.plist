@@ -2,6 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ImageAssets</key>
+	<dict>
+		<key>defaultFavorite</key>
+		<string>https://g.twimg.com/dev/documentation/image/favorite.png</string>
+		<key>hoverFavorite</key>
+		<string>https://g.twimg.com/dev/documentation/image/favorite_hover.png</string>
+		<key>onFavorite</key>
+		<string>https://g.twimg.com/dev/documentation/image/favorite_on.png</string>
+		<key>defaultReply</key>
+		<string>https://g.twimg.com/dev/documentation/image/reply.png</string>
+		<key>hoverReply</key>
+		<string>https://g.twimg.com/dev/documentation/image/reply_hover.png</string>
+		<key>defaultRetweet</key>
+		<string>https://g.twimg.com/dev/documentation/image/retweet.png</string>
+		<key>hoverRetweet</key>
+		<string>https://g.twimg.com/dev/documentation/image/retweet_hover.png</string>
+		<key>onRetweet</key>
+		<string>https://g.twimg.com/dev/documentation/image/retweet_on.png</string>
+	</dict>
+	<key>userDidLogout</key>
+	<string>userDidLogout</string>
 	<key>BaseURL</key>
 	<string>https://api.twitter.com/</string>
 	<key>AuthURL</key>

@@ -33,7 +33,7 @@ class CodePathTwitterClient: BDBOAuth1RequestOperationManager {
         //fetch request token and redirect to auth page
         CodePathTwitterClient.Instance.requestSerializer.removeAccessToken()
         
-        CodePathTwitterClient.Instance.fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "cptwitterdemo://oauth"), scope: nil, success: {(requestToken:BDBOAuth1Credential!) -> Void in
+        fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "cptwitterdemo://oauth"), scope: nil, success: {(requestToken:BDBOAuth1Credential!) -> Void in
             println("Got the request token")
             var authURLString = valueForAPIKey(keyname: "AuthURL")
             var authURL = NSURL(string: authURLString + requestToken.token)
@@ -41,6 +41,30 @@ class CodePathTwitterClient: BDBOAuth1RequestOperationManager {
             UIApplication.sharedApplication().openURL(authURL!)
             }) {(error: NSError!) -> Void in
                 println("Failed to get the request token")
+                self.loginCompletion?(user: nil, error: error)
+        }
+    }
+    
+    func openURL(url: NSURL) {
+        
+        fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: {(accessToken: BDBOAuth1Credential!) -> Void in
+            
+            println("got the access token")
+            CodePathTwitterClient.Instance.requestSerializer.saveAccessToken(accessToken)
+            
+            CodePathTwitterClient.Instance.GET("1.1/account/verify_credentials.json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+                var user = User(dictionary:response as NSDictionary)
+                println("got the user")
+                User.currentUser = user
+                self.loginCompletion?(user: user, error: nil)
+                }, failure: {(operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    println("failed to get user")
+                    self.loginCompletion?(user: nil, error: error)
+            })
+            }) { (error: NSError!) -> Void in
+                println("failed to get access token")
+                self.loginCompletion?(user: nil, error: error)
+
         }
     }
     
