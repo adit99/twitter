@@ -15,6 +15,7 @@ class Tweet: NSObject {
     var text : NSString?
     var createdAtString: NSString?
     var createdAt : NSDate?
+    var tweetID : NSString?
     
     init(dictionary: NSDictionary) {
         self.user = User(dictionary: dictionary["user"] as NSDictionary)
@@ -23,6 +24,7 @@ class Tweet: NSObject {
         var formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm::ss Z y"
         self.createdAt = formatter.dateFromString(self.createdAtString!)
+        self.tweetID = dictionary["id_str"] as? NSString
     }
     
 

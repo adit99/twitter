@@ -51,9 +51,13 @@ class User: NSObject {
         }
     }
     
-    func homeTimelineWithCompletion(completion: (tweets: [Tweet], error: NSError?) -> ()) {
-
-        CodePathTwitterClient.Instance.GET("1.1/statuses/home_timeline.json", parameters: nil, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+    func homeTimelineWithCompletion(sinceID: String = "", completion: (tweets: [Tweet], error: NSError?) -> ()) {
+        
+        var parameters = NSMutableDictionary()
+        parameters["since_id"] = sinceID
+               
+        CodePathTwitterClient.Instance.GET("1.1/statuses/home_timeline.json", parameters: (parameters["since_id"] as NSString != "") ? parameters : nil, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+                println("got home timeline")
                 var tweets = Tweet.tweetsWithArray(response as [NSDictionary])
                 completion(tweets: tweets, error: nil)
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
@@ -66,7 +70,6 @@ class User: NSObject {
     func logout() {
         User.currentUser = nil
         CodePathTwitterClient.Instance.requestSerializer.removeAccessToken()
-    
         NSNotificationCenter.defaultCenter().postNotificationName(valueForAPIKey(keyname: "userDidLogout"), object: nil)
     }
 }

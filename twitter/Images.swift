@@ -41,7 +41,6 @@ class ImageAssets {
         defaultRetweetImage = getImage(valueForAPIKeyFromDictionary(dictionaryName: "ImageAssets", keyname: "defaultRetweet"))
         hoverRetweetImage = getImage(valueForAPIKeyFromDictionary(dictionaryName: "ImageAssets", keyname: "hoverRetweet"))
         onRetweetImage = getImage(valueForAPIKeyFromDictionary(dictionaryName: "ImageAssets", keyname: "onRetweet"))
-        
     }
     
     func getImage(imageURL: NSString?) -> UIImageView {

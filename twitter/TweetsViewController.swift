@@ -12,26 +12,27 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     var tweets : [Tweet]?
     @IBOutlet weak var tabView: UITableView!
+    var refreshControl : UIRefreshControl?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //register tweet cell
         let nib = UINib(nibName: "TweetViewCell", bundle: NSBundle.mainBundle())
         self.tabView.registerNib(nib, forCellReuseIdentifier: "TweetViewCell")
         
+        //auto layout
         self.tabView.rowHeight = UITableViewAutomaticDimension
         
-        User.currentUser?.homeTimelineWithCompletion() {
-        (tweets: [Tweet]?, error: NSError?) in
-            if error == nil {
-                self.tweets = tweets
-                println(tweets?.count)
-                self.tabView.reloadData()
-            } else {
-                //handle getting hometimeline error
-            }
-        }
-
+        //load home timeline
+       loadHomeTimeline()
+        
+        //pull to refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tabView.insertSubview(self.refreshControl!, atIndex: 0)
+        
+        self.tweets = [Tweet]()
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -60,5 +61,27 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         return UITableViewAutomaticDimension
     }
     
-
+    func onRefresh() {
+        loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
+    }
+    
+    func loadHomeTimeline(sinceID : NSString = "") {
+        User.currentUser?.homeTimelineWithCompletion(sinceID : sinceID) {
+            (tweets: [Tweet]?, error: NSError?) in
+            if error == nil {
+                if self.tweets?.count != 0 {
+                    var arr = tweets! + self.tweets!
+                    self.tweets = arr
+                } else {
+                    self.tweets = tweets
+                }
+                //self.tweets = (self.tweets?.count != 0) ? tweets : (self.tweets + tweets))
+                println(tweets?.count)
+                self.tabView.reloadData()
+                self.refreshControl?.endRefreshing()
+            } else {
+                //handle getting hometimeline error
+            }
+        }
+    }
 }
