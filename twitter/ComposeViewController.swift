@@ -50,7 +50,6 @@ class ComposeViewController: UIViewController {
             } else {
                 //handle login error
                 self.navigationController?.popViewControllerAnimated(true)
-
             }
         }
         

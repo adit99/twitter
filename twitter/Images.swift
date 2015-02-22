@@ -52,6 +52,14 @@ class ImageAssets {
         return imageView
     }
     
+    func addTapGestureForImageView(inout imageView: UIImageView, target: AnyObject, selector: Selector) {
+        var tap = UITapGestureRecognizer(target: target, action: selector)
+        tap.cancelsTouchesInView = true
+        tap.numberOfTapsRequired = 1
+        tap.numberOfTouchesRequired = 1
+        imageView.userInteractionEnabled = true
+        imageView.addGestureRecognizer(tap)
+    }
     
     class var Instance : ImageAssets {
         struct Static {

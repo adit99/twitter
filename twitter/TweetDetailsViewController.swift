@@ -12,6 +12,7 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
 
     @IBOutlet weak var tabView: UITableView!
     var tweet : Tweet?
+    var tapCtrl : TapGestureController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +25,11 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
         let nib = UINib(nibName: "TweetDetailsTopCell", bundle: NSBundle.mainBundle())
         self.tabView.registerNib(nib, forCellReuseIdentifier: "TweetDetailsTopCell")
         
-        
         //clear row line separators
         self.tabView.separatorColor = UIColor.clearColor()
         
+        //Tap gestures
+        tapCtrl = TapGestureController()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,26 +43,13 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetDetailsTopCell") as TweetDetailsTopCell
         cell.loadCellContents(self.tweet!)
         
-        var tap = UITapGestureRecognizer(target: self, action: "replyTapped:")
-        tap.cancelsTouchesInView = true
-        tap.numberOfTapsRequired = 1
-        tap.numberOfTouchesRequired = 1
-        cell.replyImage.userInteractionEnabled = true
-        cell.replyImage.addGestureRecognizer(tap)
+        /*tapCtrl!.addTapGestureForImageViews(&(cell.replyImage!), retweetView: &(cell.retweetTweetImage!), favoriteView: &(cell.favoriteImage!))*/
         
-        var tap2 = UITapGestureRecognizer(target: self, action: "retweetTapped:")
-        tap2.cancelsTouchesInView = true
-        tap2.numberOfTapsRequired = 1
-        tap2.numberOfTouchesRequired = 1
-        cell.retweetTweetImage.userInteractionEnabled = true
-        cell.retweetTweetImage.addGestureRecognizer(tap2)
+        ImageAssets.Instance.addTapGestureForImageView(&(cell.replyImage!), target: self, selector: "replyTapped:")
         
-        var tap3 = UITapGestureRecognizer(target: self, action: "favoriteTapped:")
-        tap3.cancelsTouchesInView = true
-        tap3.numberOfTapsRequired = 1
-        tap3.numberOfTouchesRequired = 1
-        cell.favoriteImage.userInteractionEnabled = true
-        cell.favoriteImage.addGestureRecognizer(tap3)
+        ImageAssets.Instance.addTapGestureForImageView(&(cell.favoriteImage!), target: self, selector: "favoriteTapped:")
+        
+        ImageAssets.Instance.addTapGestureForImageView(&(cell.retweetTweetImage!), target: self, selector: "retweetTapped:")
         
         return cell
     }
@@ -82,17 +71,18 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
     }
     
     func replyTapped(gesture: UITapGestureRecognizer) {
-        println("tapped")
+        println("reply tapped")
     }
     
     func retweetTapped(gesture: UITapGestureRecognizer) {
-        println("tapped")
+        println("retweet tapped")
+        tapCtrl!.handleRetweet(gesture, sender: self, tweet: tweet!)
     }
     
     func favoriteTapped(gesture: UITapGestureRecognizer) {
-        println("tapped")
+        println("favorite tapped")
+        tapCtrl!.handleFavorite(gesture, sender: self, tweet: tweet!)
     }
-    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 220

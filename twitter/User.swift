@@ -81,6 +81,49 @@ class User: NSObject {
         })
     }
     
+    func replyToTweetWithCompletion(tweetText: String, replyTweetID: NSString, completion: (error: NSError?) -> ()) {
+        
+        var parameters = NSMutableDictionary()
+        parameters["status"] = tweetText
+        parameters["in_reply_to_status_id"] = replyTweetID
+        
+        CodePathTwitterClient.Instance.POST("1.1/statuses/update.json", parameters: parameters, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("successfully sent tweet")
+            completion(error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error sending tweet")
+                completion(error: error)
+        })
+    }
+    
+    func sendRetweetWithCompletion(tweetID: String, completion: (error: NSError?) -> ()) {
+        
+        var url = "https://api.twitter.com/1.1/statuses/retweet/\(tweetID).json"
+        println(url)
+        
+        CodePathTwitterClient.Instance.POST(url, parameters: nil, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("successfully sent retweet")
+            completion(error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error sending retweet")
+                completion(error: error)
+        })
+    }
+    
+    func favoriteTweetWithCompletion(tweetID: String, completion: (error: NSError?) -> ()) {
+        
+        var parameters = NSMutableDictionary()
+        parameters["id"] = tweetID
+        
+        CodePathTwitterClient.Instance.POST("1.1/favorites/create.json", parameters: parameters, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("successfully favorited tweet")
+            completion(error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error favoriting retweet")
+                completion(error: error)
+        })
+    }
+    
     
     func logout() {
         User.currentUser = nil
