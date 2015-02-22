@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate {
 
     var tweets : [Tweet]?
     @IBOutlet weak var tabView: UITableView!
@@ -59,15 +59,22 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("selected row")
-        
         self.performSegueWithIdentifier("gototweet", sender: self.tweets?[indexPath.row])
         
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var tweet = sender as Tweet
-        let tweetDetailsVC = segue.destinationViewController as TweetDetailsViewController
-        tweetDetailsVC.tweet = tweet
+        if (segue.identifier == "gototweet") {
+            var tweet = sender as Tweet
+            let tweetDetailsVC = segue.destinationViewController as TweetDetailsViewController
+            tweetDetailsVC.tweet = tweet
+        }
+        else if (segue.identifier == "gotocompose") {
+            var user = sender as User
+            let composeVC = segue.destinationViewController as ComposeViewController
+            composeVC.user = user
+            composeVC.delegate = self
+        }
     }
     
     
@@ -85,6 +92,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
     }
     
+    @IBAction func onComponse(sender: AnyObject) {
+        self.performSegueWithIdentifier("gotocompose", sender: User.currentUser)
+    }
+    
+    func didTweetSuceed(sender: ComposeViewController) {
+        println("did tweet succeed")
+        loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
+    }
+    
     func loadHomeTimeline(sinceID : NSString = "") {
         User.currentUser?.homeTimelineWithCompletion(sinceID : sinceID) {
             (tweets: [Tweet]?, error: NSError?) in
@@ -95,8 +111,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 } else {
                     self.tweets = tweets
                 }
-                //self.tweets = (self.tweets?.count != 0) ? tweets : (self.tweets + tweets))
-                println(tweets?.count)
                 self.tabView.reloadData()
                 self.refreshControl?.endRefreshing()
             } else {

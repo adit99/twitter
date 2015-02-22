@@ -45,7 +45,6 @@ class TweetViewCell: UITableViewCell {
     func setProfileImage(imageURL: NSString!) {
         let url = NSURL(string: imageURL!)
         let url_request = NSURLRequest(URL: url!)
-        let placeholder = UIImage(named: "no_photo")
         self.profileImage.setImageWithURL(url)
     }
 

@@ -67,6 +67,21 @@ class User: NSObject {
 
     }
     
+    func sendTweetWithCompletion(tweetText: String, completion: (error: NSError?) -> ()) {
+     
+        var parameters = NSMutableDictionary()
+        parameters["status"] = tweetText
+        
+        CodePathTwitterClient.Instance.POST("1.1/statuses/update.json", parameters: parameters, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("successfully sent tweet")
+            completion(error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error sending tweet")
+                completion(error: error)
+        })
+    }
+    
+    
     func logout() {
         User.currentUser = nil
         CodePathTwitterClient.Instance.requestSerializer.removeAccessToken()
