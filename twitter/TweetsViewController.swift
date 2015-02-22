@@ -13,6 +13,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     var tweets : [Tweet]?
     @IBOutlet weak var tabView: UITableView!
     var refreshControl : UIRefreshControl?
+    var tapCtrl : TapGestureController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +40,26 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         //initialize tweets array
         self.tweets = [Tweet]()
+        
+        //Tap gestures
+        tapCtrl = TapGestureController()
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetViewCell") as TweetViewCell
         cell.loadCellContents(self.tweets![indexPath.row])
-        return cell
         
+        ImageAssets.Instance.addTapGestureForImageView(&(cell.replyImage!), target: self, selector: "replyTapped:")
+        cell.replyImage!.tag = indexPath.row
+        
+        ImageAssets.Instance.addTapGestureForImageView(&(cell.favoriteLabel!), target: self, selector: "favoriteTapped:")
+        cell.favoriteLabel!.tag = indexPath.row
+        
+        ImageAssets.Instance.addTapGestureForImageView(&(cell.retweetImage!), target: self, selector: "retweetTapped:")
+        cell.retweetImage!.tag = indexPath.row
+        
+        return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,9 +88,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             var user = sender as User
             let composeVC = segue.destinationViewController as ComposeViewController
             composeVC.user = user
+            composeVC.tweet = nil
             composeVC.delegate = self
         }
-        
+        else if (segue.identifier == "gotoreply") {
+            var tweet = sender as Tweet
+            let composeVC = segue.destinationViewController as ComposeViewController
+            composeVC.user = nil
+            composeVC.tweet = tweet
+            composeVC.delegate = self
+        }
     }
     
     @IBAction func onLogout(sender: AnyObject) {
@@ -101,6 +121,24 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func didTweetSuceed(sender: ComposeViewController) {
         println("did tweet succeed")
         loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
+    }
+    
+    func replyTapped(gesture: UITapGestureRecognizer) {
+        println("reply tapped")
+        var replyView = gesture.view as UIImageView
+        self.performSegueWithIdentifier("gotoreply", sender: self.tweets![replyView.tag])
+    }
+    
+    func retweetTapped(gesture: UITapGestureRecognizer) {
+        println("retweet tapped")
+        var retweetView = gesture.view as UIImageView
+        tapCtrl!.handleRetweet(gesture, sender: self, tweet: self.tweets![retweetView.tag])
+    }
+    
+    func favoriteTapped(gesture: UITapGestureRecognizer) {
+        println("favorite tapped")
+        var favoriteView = gesture.view as UIImageView
+        tapCtrl!.handleFavorite(gesture, sender: self, tweet: self.tweets![favoriteView.tag])
     }
     
     func loadHomeTimeline(sinceID : NSString = "") {

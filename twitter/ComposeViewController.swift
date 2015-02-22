@@ -16,22 +16,40 @@ class ComposeViewController: UIViewController {
 
     var user : User?
     var delegate : ComposeViewControllerDelegate?
+    var tweet: Tweet?
     
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var screenName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var tweetText: UITextView!
+    @IBOutlet weak var tweetLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userName.text = user!.name
-        screenName.text = "@\(user!.screenName)"
-        let url = NSURL(string: user!.profileImageURL!)
-        let url_request = NSURLRequest(URL: url!)
-        self.profileImage.setImageWithURL(url)
+        if let usr = self.user {
+            self.tweet = nil
+            userName.text = usr.name!
+            screenName.text = "@\(usr.screenName!)"
+            let url = NSURL(string: usr.profileImageURL!)
+            let url_request = NSURLRequest(URL: url!)
+            self.profileImage.setImageWithURL(url)
+        } else if let twt = self.tweet {
+            self.user = twt.user!
+            userName.text = twt.user!.name!
+            screenName.text = "@\(twt.user!.screenName!)"
+            tweetLabel.hidden = false
+            tweetLabel.text = twt.text!
+            println(twt.text!)
+            tweetText.text = "@\(twt.user!.screenName!)"
+            let url = NSURL(string: twt.user!.profileImageURL!)
+            let url_request = NSURLRequest(URL: url!)
+            self.profileImage.setImageWithURL(url)
+        }
         
-       
+        tweetText.layer.cornerRadius = 5
+        tweetText.layer.borderColor = UIColor.blackColor().CGColor
+        tweetText.layer.borderWidth = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +70,6 @@ class ComposeViewController: UIViewController {
                 self.navigationController?.popViewControllerAnimated(true)
             }
         }
-        
         
     }
 

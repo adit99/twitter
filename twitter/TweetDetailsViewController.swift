@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate {
 
     @IBOutlet weak var tabView: UITableView!
     var tweet : Tweet?
@@ -70,8 +70,27 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
         return UITableViewAutomaticDimension
     }
     
+    @IBAction func onReply(sender: AnyObject) {
+        println("on reply")
+        self.performSegueWithIdentifier("gotoreply", sender: tweet!)
+    }
+    
     func replyTapped(gesture: UITapGestureRecognizer) {
         println("reply tapped")
+        self.performSegueWithIdentifier("gotoreply", sender: tweet!)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var tweet = sender as Tweet
+        let composeVC = segue.destinationViewController as ComposeViewController
+        composeVC.tweet = tweet
+        composeVC.user = nil
+        composeVC.delegate = self
+    }
+    
+    func didTweetSuceed(sender: ComposeViewController) {
+        println("reply tweet did succeed")
+        //reload user timeline
     }
     
     func retweetTapped(gesture: UITapGestureRecognizer) {
