@@ -59,7 +59,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("selected row")
+        self.tabView.deselectRowAtIndexPath(indexPath, animated: true)
         self.performSegueWithIdentifier("gototweet", sender: self.tweets?[indexPath.row])
+        
         
     }
     
@@ -75,8 +77,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             composeVC.user = user
             composeVC.delegate = self
         }
+        
     }
-    
     
     @IBAction func onLogout(sender: AnyObject) {
         User.currentUser?.logout()

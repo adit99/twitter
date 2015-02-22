@@ -41,6 +41,8 @@ class TweetDetailsTopCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+  
+    
     func loadCellContents(tweet: Tweet) {
         
         //profile image
