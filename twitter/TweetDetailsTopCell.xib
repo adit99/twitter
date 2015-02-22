@@ -61,6 +61,7 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOR-Kg-kyV">
                         <rect key="frame" x="11" y="170" width="20" height="21"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="6uK-8i-4Wg"/>
                             <constraint firstAttribute="width" constant="20" id="bF8-Kb-ONz"/>

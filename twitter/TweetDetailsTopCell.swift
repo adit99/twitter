@@ -31,6 +31,8 @@ class TweetDetailsTopCell: UITableViewCell {
         super.awakeFromNib()
         self.tweetLabel.preferredMaxLayoutWidth = self.tweetLabel.frame.size.width
         // Initialization code
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -71,6 +73,5 @@ class TweetDetailsTopCell: UITableViewCell {
         self.tweetLabel.preferredMaxLayoutWidth = self.tweetLabel.frame.size.width
     }
     
-    
-    
+
 }

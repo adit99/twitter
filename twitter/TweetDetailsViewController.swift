@@ -27,6 +27,10 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
         //clear row line separators
         self.tabView.separatorColor = UIColor.clearColor()
         
+        //tap gestures
+       
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +43,9 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
         
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetDetailsTopCell") as TweetDetailsTopCell
         cell.loadCellContents(self.tweet!)
+        var tap = UITapGestureRecognizer(target: self, action: "replyTapped")
+        //tap.delegate = self
+        cell.replyImage.addGestureRecognizer(tap)
         return cell
         
     }
@@ -57,6 +64,10 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return UITableViewAutomaticDimension
+    }
+    
+    func replyTapped() {
+        println("tapped")
     }
 
 }
