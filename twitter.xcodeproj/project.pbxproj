@@ -23,6 +23,9 @@
 		BEA0BEF11A970BB60036C45C /* TweetViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA0BEEF1A970BB60036C45C /* TweetViewCell.xib */; };
 		BEA0BEF51A9901D50036C45C /* blue-bird.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA0BEF41A9901D50036C45C /* blue-bird.png */; };
 		BEA0BEF71A990A7C0036C45C /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0BEF61A990A7C0036C45C /* Images.swift */; };
+		BEA0BEFB1A9948C30036C45C /* TweetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0BEFA1A9948C30036C45C /* TweetDetailsViewController.swift */; };
+		BEA0BEFE1A994AB90036C45C /* TweetDetailsTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0BEFC1A994AB90036C45C /* TweetDetailsTopCell.swift */; };
+		BEA0BEFF1A994AB90036C45C /* TweetDetailsTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA0BEFD1A994AB90036C45C /* TweetDetailsTopCell.xib */; };
 		BECE35A81A9647DE0062A667 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE138E0F1A94422F00BEA675 /* Accounts.framework */; };
 		BECE35A91A9647E40062A667 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE138E0D1A94414B00BEA675 /* Social.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +65,9 @@
 		BEA0BEEF1A970BB60036C45C /* TweetViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetViewCell.xib; sourceTree = "<group>"; };
 		BEA0BEF41A9901D50036C45C /* blue-bird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue-bird.png"; sourceTree = "<group>"; };
 		BEA0BEF61A990A7C0036C45C /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		BEA0BEFA1A9948C30036C45C /* TweetDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailsViewController.swift; sourceTree = "<group>"; };
+		BEA0BEFC1A994AB90036C45C /* TweetDetailsTopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailsTopCell.swift; sourceTree = "<group>"; };
+		BEA0BEFD1A994AB90036C45C /* TweetDetailsTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetDetailsTopCell.xib; sourceTree = "<group>"; };
 		DCF170C5E98F5C642B00B6CD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -182,6 +188,7 @@
 			children = (
 				BE2454E81A94371800E1D31F /* ViewController.swift */,
 				BEA0BEEB1A96FD090036C45C /* TweetsViewController.swift */,
+				BEA0BEFA1A9948C30036C45C /* TweetDetailsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -191,6 +198,8 @@
 			children = (
 				BEA0BEEE1A970BB60036C45C /* TweetViewCell.swift */,
 				BEA0BEEF1A970BB60036C45C /* TweetViewCell.xib */,
+				BEA0BEFC1A994AB90036C45C /* TweetDetailsTopCell.swift */,
+				BEA0BEFD1A994AB90036C45C /* TweetDetailsTopCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -291,6 +300,7 @@
 				BE2454EC1A94371800E1D31F /* Main.storyboard in Resources */,
 				BEA0BEF51A9901D50036C45C /* blue-bird.png in Resources */,
 				BE2454F11A94371800E1D31F /* LaunchScreen.xib in Resources */,
+				BEA0BEFF1A994AB90036C45C /* TweetDetailsTopCell.xib in Resources */,
 				BEA0BEF11A970BB60036C45C /* TweetViewCell.xib in Resources */,
 				BE2454EE1A94371800E1D31F /* Images.xcassets in Resources */,
 			);
@@ -345,8 +355,10 @@
 			files = (
 				BE138E131A94549800BEA675 /* User.swift in Sources */,
 				BE138E151A9454A800BEA675 /* Tweet.swift in Sources */,
+				BEA0BEFE1A994AB90036C45C /* TweetDetailsTopCell.swift in Sources */,
 				BEA0BEEC1A96FD090036C45C /* TweetsViewController.swift in Sources */,
 				BEA0BEF01A970BB60036C45C /* TweetViewCell.swift in Sources */,
+				BEA0BEFB1A9948C30036C45C /* TweetDetailsViewController.swift in Sources */,
 				BE2454E91A94371800E1D31F /* ViewController.swift in Sources */,
 				BEA0BEF71A990A7C0036C45C /* Images.swift in Sources */,
 				BE2454E71A94371800E1D31F /* AppDelegate.swift in Sources */,

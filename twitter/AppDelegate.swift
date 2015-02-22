@@ -32,9 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
         //force loading of image assets
-        SVProgressHUD.show()
         ImageAssets.Instance
-        SVProgressHUD.dismiss()
         
         return true
     }

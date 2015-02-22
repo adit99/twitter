@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CK-SV-Fac">
-                                <rect key="frame" x="87" y="259" width="148" height="34"/>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CK-SV-Fac">
+                                <rect key="frame" x="91" y="256" width="148" height="34"/>
                                 <state key="normal" title="Login with Twitter">
                                     <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -72,11 +72,44 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tabView" destination="Wqd-ly-ucr" id="Rdy-hL-8BI"/>
+                        <segue destination="Qun-RB-vtk" kind="push" identifier="gototweet" id="Brn-JL-OBJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dOA-m8-CVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1608" y="153"/>
+        </scene>
+        <!--Tweet-->
+        <scene sceneID="Dtd-IF-8hA">
+            <objects>
+                <viewController storyboardIdentifier="gototweet" title="Tweet" id="Qun-RB-vtk" customClass="TweetDetailsViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cQE-RX-ZyY"/>
+                        <viewControllerLayoutGuide type="bottom" id="EAz-E6-Jer"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="80b-ed-heM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bvj-0u-6gE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Qun-RB-vtk" id="Yzb-J0-BJw"/>
+                                    <outlet property="delegate" destination="Qun-RB-vtk" id="4XH-LB-Nch"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tweet" id="vYu-RF-rUj"/>
+                    <connections>
+                        <outlet property="tabView" destination="bvj-0u-6gE" id="aKh-lc-5Ns"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6ru-zV-my6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1971" y="93"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VfV-On-gNp">

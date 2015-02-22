@@ -24,14 +24,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         //auto layout
         self.tabView.rowHeight = UITableViewAutomaticDimension
         
+        //SVProgressHUD.show()
+
         //load home timeline
-       loadHomeTimeline()
+        loadHomeTimeline()
+    
+        //SVProgressHUD.dismiss()
+
         
         //pull to refresh
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         self.tabView.insertSubview(self.refreshControl!, atIndex: 0)
         
+        //initialize tweets array
         self.tweets = [Tweet]()
     }
 
@@ -51,6 +57,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("selected row")
+        
+        self.performSegueWithIdentifier("gototweet", sender: self.tweets?[indexPath.row])
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var tweet = sender as Tweet
+        let tweetDetailsVC = segue.destinationViewController as TweetDetailsViewController
+        tweetDetailsVC.tweet = tweet
+    }
+    
+    
     @IBAction func onLogout(sender: AnyObject) {
         User.currentUser?.logout()
     }
