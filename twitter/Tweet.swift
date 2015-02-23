@@ -35,7 +35,7 @@ class Tweet: NSObject {
         self.retweetCount = dictionary["retweet_count"] as? Int
         self.retweeted = dictionary["retweeted"] as? Int
         
-        println(dictionary)
+        //println(dictionary)
     }
 
     class func tweetsWithArray(array: [NSDictionary]) -> [Tweet] {
