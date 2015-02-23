@@ -54,9 +54,14 @@ class TweetDetailsTopCell: UITableViewCell {
         tweetLabel.text = tweet.text
         
         //images
-        favoriteImage.image = ImageAssets.Instance.defaultFavoriteImage!.image
+        favoriteImage.image = (tweet.favorited! == 0) ? ImageAssets.Instance.defaultFavoriteImage!.image :ImageAssets.Instance.onFavoriteImage!.image
+        favoriteImage.accessibilityIdentifier = (tweet.favorited! == 0) ? "default" : "on"
+        
         replyImage.image = ImageAssets.Instance.defaultReplyImage!.image
-        retweetTweetImage.image = ImageAssets.Instance.defaultRetweetImage!.image
+        
+        retweetTweetImage.image = (tweet.retweeted! == 0)  ? ImageAssets.Instance.defaultRetweetImage!.image : ImageAssets.Instance.onRetweetImage!.image
+        retweetTweetImage.accessibilityIdentifier = (tweet.retweeted! == 0) ? "default" : "on"
+        
         //retweetUserImage.image = ImageAssets.Instance.defaultRetweetImage!.image
 
         //favorite and retweet counts

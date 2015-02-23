@@ -36,10 +36,13 @@ class TweetViewCell: UITableViewCell {
         //createdAtLabel.text = tweet.createdAt?.description
         
         //images
-        favoriteLabel.image = ImageAssets.Instance.defaultFavoriteImage!.image
-        replyImage.image = ImageAssets.Instance.defaultReplyImage!.image
-        retweetImage.image = ImageAssets.Instance.defaultRetweetImage!.image
+        favoriteLabel.image = (tweet.favorited! == 0) ? ImageAssets.Instance.defaultFavoriteImage!.image :ImageAssets.Instance.onFavoriteImage!.image
+        favoriteLabel.accessibilityIdentifier = (tweet.favorited! == 0) ? "default" : "on"
         
+        replyImage.image = ImageAssets.Instance.defaultReplyImage!.image
+        
+        retweetImage.image = (tweet.retweeted! == 0)  ? ImageAssets.Instance.defaultRetweetImage!.image : ImageAssets.Instance.onRetweetImage!.image
+        retweetImage.accessibilityIdentifier = (tweet.retweeted! == 0) ? "default" : "on"
     }
     
     func setProfileImage(imageURL: NSString!) {

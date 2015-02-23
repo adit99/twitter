@@ -110,6 +110,20 @@ class User: NSObject {
         })
     }
     
+    func sendRetweetDeleteWithCompletion(tweetID: String, completion: (error: NSError?) -> ()) {
+        
+        var url = "https://api.twitter.com/1.1/statuses/destroy/\(tweetID)/.json"
+        println(url)
+        
+        CodePathTwitterClient.Instance.POST(url, parameters: nil, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("successfully deleted retweet")
+            completion(error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error sending retweet delete")
+                completion(error: error)
+        })
+    }
+    
     func favoriteTweetWithCompletion(tweetID: String, completion: (error: NSError?) -> ()) {
         
         var parameters = NSMutableDictionary()
@@ -124,6 +138,19 @@ class User: NSObject {
         })
     }
     
+    func unFavoriteTweetWithCompletion(tweetID: String, completion: (error: NSError?) -> ()) {
+        
+        var parameters = NSMutableDictionary()
+        parameters["id"] = tweetID
+        
+        CodePathTwitterClient.Instance.POST("1.1/favorites/destroy.json", parameters: parameters, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("successfully favorited tweet")
+            completion(error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error favoriting retweet")
+                completion(error: error)
+        })
+    }
     
     func logout() {
         User.currentUser = nil

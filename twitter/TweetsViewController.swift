@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, TweetDetailsViewControllerDelegate {
 
     var tweets : [Tweet]?
     @IBOutlet weak var tabView: UITableView!
@@ -73,16 +73,19 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         println("selected row")
         self.tabView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("gototweet", sender: self.tweets?[indexPath.row])
+        self.performSegueWithIdentifier("gototweet", sender: indexPath)
         
         
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "gototweet") {
-            var tweet = sender as Tweet
+            var indexPath = sender as? NSIndexPath
+            var tweet = self.tweets![indexPath!.row]
             let tweetDetailsVC = segue.destinationViewController as TweetDetailsViewController
             tweetDetailsVC.tweet = tweet
+            tweetDetailsVC.delegate = self
+            tweetDetailsVC.indexPath = indexPath
         }
         else if (segue.identifier == "gotocompose") {
             var user = sender as User
@@ -123,6 +126,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
     }
     
+    func tweetDidChange(sender: TweetDetailsViewController, tweet: Tweet) {
+        self.tweets![sender.indexPath!.row] = tweet
+        self.tabView.reloadRowsAtIndexPaths([sender.indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+    }
+    
     func replyTapped(gesture: UITapGestureRecognizer) {
         println("reply tapped")
         var replyView = gesture.view as UIImageView
@@ -137,8 +145,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func favoriteTapped(gesture: UITapGestureRecognizer) {
         println("favorite tapped")
-        var favoriteView = gesture.view as UIImageView
-        tapCtrl!.handleFavorite(gesture, sender: self, tweet: self.tweets![favoriteView.tag])
+       
+        tapCtrl!.handleFavorite(gesture, sender: self, tweet: self.tweets![(gesture.view as UIImageView).tag])
     }
     
     func loadHomeTimeline(sinceID : NSString = "") {

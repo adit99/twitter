@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol TweetDetailsViewControllerDelegate {
+    func tweetDidChange(sender: TweetDetailsViewController, tweet: Tweet)
+}
+
 class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate {
 
     @IBOutlet weak var tabView: UITableView!
     var tweet : Tweet?
     var tapCtrl : TapGestureController?
-    
+    var indexPath : NSIndexPath?
+    var delegate : TweetDetailsViewControllerDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,11 +102,15 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
     func retweetTapped(gesture: UITapGestureRecognizer) {
         println("retweet tapped")
         tapCtrl!.handleRetweet(gesture, sender: self, tweet: tweet!)
+        self.delegate?.tweetDidChange(self, tweet: tweet!)
+        self.tabView.reloadData()
     }
     
     func favoriteTapped(gesture: UITapGestureRecognizer) {
         println("favorite tapped")
         tapCtrl!.handleFavorite(gesture, sender: self, tweet: tweet!)
+        self.delegate?.tweetDidChange(self, tweet: tweet!)
+        self.tabView.reloadData()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
