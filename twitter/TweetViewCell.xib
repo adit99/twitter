@@ -32,8 +32,8 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="I have seen the future http://uc" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgg-p7-mV5">
-                        <rect key="frame" x="80" y="31" width="222.5" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I have seen the future http://uc" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgg-p7-mV5">
+                        <rect key="frame" x="80" y="31" width="224" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -77,6 +77,7 @@
                     <constraint firstItem="zWt-uQ-Wt1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Zgg-p7-mV5" secondAttribute="bottom" constant="8" id="NYZ-sX-zr9"/>
                     <constraint firstItem="O79-uV-TVL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="TKW-d8-pr0"/>
                     <constraint firstAttribute="bottom" secondItem="GLC-84-q7Q" secondAttribute="bottom" constant="4" id="W9V-Tj-rWE"/>
+                    <constraint firstAttribute="trailing" secondItem="Zgg-p7-mV5" secondAttribute="trailing" constant="30" id="ZBY-nU-fBf"/>
                     <constraint firstItem="GLC-84-q7Q" firstAttribute="leading" secondItem="zWt-uQ-Wt1" secondAttribute="trailing" constant="65" id="aVo-sf-PTp"/>
                     <constraint firstItem="CLA-Wa-PWA" firstAttribute="leading" secondItem="w5Q-F0-mQZ" secondAttribute="trailing" constant="2" id="bog-6v-7ao"/>
                     <constraint firstItem="kgs-06-fQm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="cnj-fW-Mpu"/>

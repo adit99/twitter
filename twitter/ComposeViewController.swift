@@ -12,7 +12,7 @@ protocol ComposeViewControllerDelegate {
     func didTweetSuceed(sender: ComposeViewController)
 }
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
 
     var user : User?
     var delegate : ComposeViewControllerDelegate?
@@ -23,6 +23,7 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var tweetText: UITextView!
     @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var tweetCharCount: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,9 @@ class ComposeViewController: UIViewController {
         tweetText.layer.cornerRadius = 5
         tweetText.layer.borderColor = UIColor.blackColor().CGColor
         tweetText.layer.borderWidth = 1
+        
+        tweetCharCount.hidden = true
+        tweetText.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,6 +77,15 @@ class ComposeViewController: UIViewController {
         
     }
 
- 
+    func textViewDidChange(textView: UITextView) {
+       
+        if (countElements(textView.text) == 141) {
+            tweetText.text = tweetText.text.substringToIndex(advance(tweetText.text.startIndex,140))
+        } else {
+            let count = 140 - countElements(textView.text)
+            tweetCharCount.hidden = false
+            tweetCharCount.text = String(count)
+        }
+    }
 
 }

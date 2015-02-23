@@ -106,7 +106,7 @@
                                     <constraint firstAttribute="width" constant="68" id="EBw-gV-d1C"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AJ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtY-Zc-laC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="AJ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtY-Zc-laC">
                                 <rect key="frame" x="87" y="79" width="19" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -123,7 +123,7 @@
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="alphabet" keyboardAppearance="alert"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Sir tweets a lot" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSy-Ah-cRc">
@@ -132,6 +132,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSS-Im-bZv">
+                                <rect key="frame" x="266" y="83" width="44" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -139,10 +145,13 @@
                             <constraint firstItem="yQe-u3-XXv" firstAttribute="top" secondItem="9lJ-N7-m8p" secondAttribute="bottom" constant="15" id="1zu-zv-Rjg"/>
                             <constraint firstAttribute="trailing" secondItem="bSy-Ah-cRc" secondAttribute="trailing" constant="12" id="7iA-wD-nBM"/>
                             <constraint firstItem="egu-rz-BYK" firstAttribute="leading" secondItem="yQe-u3-XXv" secondAttribute="trailing" constant="8" id="9Xr-Vf-Mow"/>
+                            <constraint firstItem="GSS-Im-bZv" firstAttribute="top" secondItem="9lJ-N7-m8p" secondAttribute="bottom" constant="19" id="CCF-HN-XX6"/>
                             <constraint firstItem="iEj-oK-zJz" firstAttribute="top" secondItem="bSy-Ah-cRc" secondAttribute="bottom" constant="30" id="KNX-Y7-WWc"/>
                             <constraint firstItem="bSy-Ah-cRc" firstAttribute="top" secondItem="egu-rz-BYK" secondAttribute="bottom" constant="4" id="Km0-uU-mJB"/>
                             <constraint firstItem="TtY-Zc-laC" firstAttribute="leading" secondItem="yQe-u3-XXv" secondAttribute="trailing" constant="8" id="NFg-fz-XbJ"/>
                             <constraint firstItem="yQe-u3-XXv" firstAttribute="leading" secondItem="jHF-an-YEk" secondAttribute="leading" constant="11" id="PiU-cS-tRR"/>
+                            <constraint firstAttribute="trailing" secondItem="GSS-Im-bZv" secondAttribute="trailing" constant="10" id="XLb-e8-zAo"/>
+                            <constraint firstItem="GSS-Im-bZv" firstAttribute="leading" secondItem="TtY-Zc-laC" secondAttribute="trailing" constant="160" id="a4H-Xo-yXh"/>
                             <constraint firstItem="bSy-Ah-cRc" firstAttribute="leading" secondItem="yQe-u3-XXv" secondAttribute="trailing" constant="8" id="de7-Ix-7nf"/>
                             <constraint firstItem="egu-rz-BYK" firstAttribute="top" secondItem="9lJ-N7-m8p" secondAttribute="bottom" constant="30" id="tXm-ge-FIv"/>
                             <constraint firstItem="TtY-Zc-laC" firstAttribute="top" secondItem="9lJ-N7-m8p" secondAttribute="bottom" constant="15" id="urt-Ci-D5w"/>
@@ -161,6 +170,7 @@
                     <connections>
                         <outlet property="profileImage" destination="yQe-u3-XXv" id="pZm-nb-8J6"/>
                         <outlet property="screenName" destination="egu-rz-BYK" id="GrA-hT-npJ"/>
+                        <outlet property="tweetCharCount" destination="GSS-Im-bZv" id="aKo-hc-RaW"/>
                         <outlet property="tweetLabel" destination="bSy-Ah-cRc" id="Qpq-ST-M22"/>
                         <outlet property="tweetText" destination="iEj-oK-zJz" id="Wb3-ri-z4y"/>
                         <outlet property="userName" destination="TtY-Zc-laC" id="U7C-mE-MhY"/>
