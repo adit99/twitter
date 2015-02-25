@@ -33,7 +33,7 @@ class TweetViewCell: UITableViewCell {
         userLabel.text = tweet.user!.name
         handleLabel.text = "@\(tweet.user!.screenName!)"
         tweetLabel.text = tweet.text
-        //createdAtLabel.text = tweet.createdAt?.description
+        createdAtLabel.text = Tweet.timeSinceTweet(tweet.createdAt!)
         
         //images
         favoriteLabel.image = (tweet.favorited! == 0) ? ImageAssets.Instance.defaultFavoriteImage!.image :ImageAssets.Instance.onFavoriteImage!.image

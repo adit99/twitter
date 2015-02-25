@@ -45,6 +45,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tapCtrl = TapGestureController()
     }
 
+    override func viewDidAppear(animated: Bool) {
+        println("view did appear")
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetViewCell") as TweetViewCell
@@ -127,8 +131,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tweetDidChange(sender: TweetDetailsViewController, tweet: Tweet) {
+        println("tweet did change")
         self.tweets![sender.indexPath!.row] = tweet
-        self.tabView.reloadRowsAtIndexPaths([sender.indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+        //self.tabView.reloadRowsAtIndexPaths([sender.indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+        loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
     }
     
     func replyTapped(gesture: UITapGestureRecognizer) {
@@ -145,11 +151,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func favoriteTapped(gesture: UITapGestureRecognizer) {
         println("favorite tapped")
-       
         tapCtrl!.handleFavorite(gesture, sender: self, tweet: self.tweets![(gesture.view as UIImageView).tag])
     }
     
     func loadHomeTimeline(sinceID : NSString = "") {
+        println("load home timeline since \(sinceID)")
         User.currentUser?.homeTimelineWithCompletion(sinceID : sinceID) {
             (tweets: [Tweet]?, error: NSError?) in
             if error == nil {

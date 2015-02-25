@@ -152,7 +152,7 @@
                 <outlet property="replyImage" destination="uOR-Kg-kyV" id="Gmb-Th-b2L"/>
                 <outlet property="retweetTweetImage" destination="bf4-A7-qNq" id="cSg-h3-rVQ"/>
                 <outlet property="retweetsLabel" destination="Usz-kt-bML" id="jag-3E-OR7"/>
-                <outlet property="tweetLabel" destination="gzk-RN-8R0" id="Phw-3R-bgE"/>
+                <outlet property="tweetLabel" destination="gzk-RN-8R0" id="pD0-ui-9JI"/>
             </connections>
             <point key="canvasLocation" x="356.5" y="257"/>
         </tableViewCell>

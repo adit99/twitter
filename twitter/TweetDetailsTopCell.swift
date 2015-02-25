@@ -18,7 +18,8 @@ class TweetDetailsTopCell: UITableViewCell {
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileScreenName: UILabel!
     
-    @IBOutlet weak var tweetLabel: UILabel!
+    //@IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var tweetLabel: TTTAttributedLabel!
     
     @IBOutlet weak var retweetsLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
@@ -52,21 +53,32 @@ class TweetDetailsTopCell: UITableViewCell {
         profileNameLabel.text = tweet.user!.name
         profileScreenName.text = "@\(tweet.user!.screenName!)"
         tweetLabel.text = tweet.text
-        
+
+
         //images
         favoriteImage.image = (tweet.favorited! == 0) ? ImageAssets.Instance.defaultFavoriteImage!.image :ImageAssets.Instance.onFavoriteImage!.image
-        favoriteImage.accessibilityIdentifier = (tweet.favorited! == 0) ? "default" : "on"
+        favoriteImage.highlighted = (tweet.favorited! == 0) ? false : true
         
         replyImage.image = ImageAssets.Instance.defaultReplyImage!.image
         
         retweetTweetImage.image = (tweet.retweeted! == 0)  ? ImageAssets.Instance.defaultRetweetImage!.image : ImageAssets.Instance.onRetweetImage!.image
-        retweetTweetImage.accessibilityIdentifier = (tweet.retweeted! == 0) ? "default" : "on"
+        retweetTweetImage.highlighted = (tweet.retweeted! == 0) ? false : true
         
         //retweetUserImage.image = ImageAssets.Instance.defaultRetweetImage!.image
 
         //favorite and retweet counts
         favoritesLabel.text = "\(tweet.favoriteCount!.description) favorites"
         retweetsLabel.text = "\(tweet.retweetCount!.description) retweets"
+        
+        /*tweetLabel.text = tweet.text
+        tweetLabel.setText(<#text: AnyObject!#>, afterInheritingLabelAttributesAndConfiguringWithBlock: <#((NSMutableAttributedString!) -> NSMutableAttributedString!)!##(NSMutableAttributedString!) -> NSMutableAttributedString!#>)
+        
+        let linkColor = UIColor(red: 0.203, green: 0.329, blue: 0.835, alpha: 1)
+        let linkActiveColor = UIColor.blackColor()
+                
+        tweetLabel.linkAttributes = [NSForegroundColorAttributeName : linkColor]
+        tweetLabel.activeLinkAttributes = [NSForegroundColorAttributeName : linkActiveColor]
+        tweetLabel.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue*/
     }
     
     func setProfileImage(imageURL: NSString!) {

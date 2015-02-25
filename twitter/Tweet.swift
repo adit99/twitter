@@ -47,5 +47,26 @@ class Tweet: NSObject {
         return tweets
     }
     
+    class func timeSinceTweet(fromDate: NSDate) ->  NSString {
+        
+        let toDate = NSDate()
+        let gregorianCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+        let flags: NSCalendarUnit = .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit | .DayCalendarUnit
+        
+        let components = gregorianCalendar.components(flags, fromDate: fromDate, toDate: toDate, options: NSCalendarOptions(0))
+        
+        if components.day > 0 {
+            return "\(components.day)d"
+        }
+        if components.hour > 0 {
+            return "\(components.hour)h"
+        }
+        if components.minute > 0 {
+            return "\(components.minute)m"
+        }
+        
+        return "\(components.second)s"
+    }
+    
 }
 

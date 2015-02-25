@@ -22,12 +22,12 @@ class TapGestureController : UIViewController {
         
         println("Current State : \(favoriteImageView.accessibilityIdentifier)")
         
-        switch favoriteImageView.accessibilityIdentifier {
-            case "default":
+        switch favoriteImageView.highlighted {
+            case false:
                 setFavorite(gesture, tweet: tweet)
                 break
     
-            case "on":
+            case true:
                 unSetFavorite(gesture, tweet: tweet)
                 break
             
@@ -46,7 +46,7 @@ class TapGestureController : UIViewController {
             if error == nil {
                 println("favorting tweet suceeded")
                 favoriteImageView.image = ImageAssets.Instance.onFavoriteImage!.image
-                favoriteImageView.accessibilityIdentifier = "on"
+                favoriteImageView.highlighted = true
                 tweet.favoriteCount! += 1
                 tweet.favorited = 1
             } else {
@@ -65,7 +65,7 @@ class TapGestureController : UIViewController {
             if error == nil {
                 println("unfavorting tweet suceeded")
                 favoriteImageView.image = ImageAssets.Instance.defaultFavoriteImage!.image
-                favoriteImageView.accessibilityIdentifier = "default"
+                favoriteImageView.highlighted = false
                 tweet.favoriteCount! -= 1
                 tweet.favorited = 0
             } else {
@@ -81,12 +81,12 @@ class TapGestureController : UIViewController {
         
         println("Current State : \(retweetImageView.accessibilityIdentifier)")
         
-        switch retweetImageView.accessibilityIdentifier {
-        case "default":
+        switch retweetImageView.highlighted {
+        case false:
             sendRetweet(gesture, sender: sender, tweet: tweet)
             break
             
-        case "on":
+        case true:
             deleteRetweet(gesture, sender: sender, tweet: tweet)
             break
             
@@ -114,7 +114,7 @@ class TapGestureController : UIViewController {
                 if error == nil {
                     println("retweet suceeded")
                     retweetImageView.image = ImageAssets.Instance.onRetweetImage!.image
-                    retweetImageView.accessibilityIdentifier = "on"
+                    retweetImageView.highlighted = true
                     tweet.retweeted = 1
                     tweet.retweetCount! += 1
                 } else {
@@ -141,7 +141,7 @@ class TapGestureController : UIViewController {
         //Not implemented :(
         var retweetImageView = gesture.view! as UIImageView
         retweetImageView.image = ImageAssets.Instance.defaultRetweetImage!.image
-        retweetImageView.accessibilityIdentifier = "default"
+        retweetImageView.highlighted = false
         tweet.retweeted = 0
         tweet.retweetCount! -= 1
         
