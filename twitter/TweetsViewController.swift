@@ -75,7 +75,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if let tweetsArray = self.tweets  {
+            println(tweetsArray.count)
             return tweetsArray.count
         } else {
             return 0
@@ -205,7 +207,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
         }
         else if menuItem == "Profile" {
-            
+            self.performSegueWithIdentifier("gotoprofile", sender: self)
         }
         else if menuItem == "Mentions" {
             

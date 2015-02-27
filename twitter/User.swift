@@ -17,13 +17,24 @@ class User: NSObject {
     var screenName : NSString?
     var profileImageURL: NSString?
     var tagLine : NSString?
+    var backgroundImageURL: NSString?
     var dictionary : NSDictionary?
-    
+    var followersCount: Int?
+    var tweets: Int?
+    var followingCount: Int?
+    var location: NSString?
+
     init(dictionary: NSDictionary) {
         self.name = dictionary["name"] as? NSString
         self.screenName = dictionary["screen_name"] as? NSString
         self.profileImageURL = dictionary["profile_image_url"] as? NSString
+        self.backgroundImageURL = dictionary["profile_background_image_url"] as? NSString
+        self.followersCount = dictionary["followers_count"] as? Int
+        self.tweets = dictionary["statuses_count"] as? Int
+        self.followingCount = dictionary["friends_count"] as? Int
         self.tagLine = dictionary["description"] as? NSString
+        self.location = dictionary["location"] as? NSString
+        
         self.dictionary = dictionary
     }
     
@@ -65,6 +76,23 @@ class User: NSObject {
                 completion(tweets: [Tweet](), error: error)
         })
 
+    }
+    
+    func userTimelineWithCompletion(sinceID: String = "", completion: (tweets: [Tweet], error: NSError?) -> ()) {
+        
+        var parameters = NSMutableDictionary()
+        parameters["screen_name"] = screenName
+        parameters["since_id"] = sinceID
+        
+        CodePathTwitterClient.Instance.GET("1.1/statuses/user_timeline.json", parameters: (parameters["since_id"] as NSString != "") ? parameters : nil, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("got user timeline")
+            var tweets = Tweet.tweetsWithArray(response as [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error getting home timeline")
+                completion(tweets: [Tweet](), error: error)
+        })
+        
     }
     
     func sendTweetWithCompletion(tweetText: String, completion: (error: NSError?) -> ()) {
