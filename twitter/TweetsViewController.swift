@@ -8,12 +8,17 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, TweetDetailsViewControllerDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, TweetDetailsViewControllerDelegate, SideBarDelegate {
 
     var tweets : [Tweet]?
+    //@IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tabView: UITableView!
     var refreshControl : UIRefreshControl?
     var tapCtrl : TapGestureController?
+    let menu:Array<String> = ["Home", "Profile", "Mentions"]
+    
+    //redux
+   var sideBar:SideBar?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +30,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         //auto layout
         self.tabView.rowHeight = UITableViewAutomaticDimension
         
-        //SVProgressHUD.show()
 
         //load home timeline
         loadHomeTimeline()
@@ -43,10 +47,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         //Tap gestures
         tapCtrl = TapGestureController()
+        
+        //redux
+        viewDidLoadRedux()
     }
 
     override func viewDidAppear(animated: Bool) {
         println("view did appear")
+        super.viewDidAppear(animated)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -78,12 +86,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         println("selected row")
         self.tabView.deselectRowAtIndexPath(indexPath, animated: true)
         self.performSegueWithIdentifier("gototweet", sender: indexPath)
-        
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "gototweet") {
+        println("prepare for segue : \(segue.identifier!)")
+        if (segue.identifier! == "gototweet") {
             var indexPath = sender as? NSIndexPath
             var tweet = self.tweets![indexPath!.row]
             let tweetDetailsVC = segue.destinationViewController as TweetDetailsViewController
@@ -91,14 +98,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             tweetDetailsVC.delegate = self
             tweetDetailsVC.indexPath = indexPath
         }
-        else if (segue.identifier == "gotocompose") {
+        else if (segue.identifier! == "gotocompose") {
             var user = sender as User
             let composeVC = segue.destinationViewController as ComposeViewController
             composeVC.user = user
             composeVC.tweet = nil
             composeVC.delegate = self
         }
-        else if (segue.identifier == "gotoreply") {
+        else if (segue.identifier! == "gotoreply") {
             var tweet = sender as Tweet
             let composeVC = segue.destinationViewController as ComposeViewController
             composeVC.user = nil
@@ -133,7 +140,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tweetDidChange(sender: TweetDetailsViewController, tweet: Tweet) {
         println("tweet did change")
         self.tweets![sender.indexPath!.row] = tweet
-        //self.tabView.reloadRowsAtIndexPaths([sender.indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
     }
     
@@ -156,6 +162,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func loadHomeTimeline(sinceID : NSString = "") {
         println("load home timeline since \(sinceID)")
+        SVProgressHUD.show()
         User.currentUser?.homeTimelineWithCompletion(sinceID : sinceID) {
             (tweets: [Tweet]?, error: NSError?) in
             if error == nil {
@@ -171,5 +178,38 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 //handle getting hometimeline error
             }
         }
+        SVProgressHUD.dismiss()
     }
+    
+    //redux stuff
+   
+    func viewDidLoadRedux() {
+        println("view did load redux")
+
+        sideBar = SideBar(sourceView: self.view!, menu:menu)
+        sideBar!.delegate = self
+        
+        self.addChildViewController(sideBar!.sideBarTableViewController);
+        sideBar!.sideBarTableViewController.didMoveToParentViewController(self);
+    }
+    
+    func sideBarDidSelectButtonAtIndex(index: Int) {
+        println("side bar did select \(menu[index])")
+        transitionToViewController(menu[index])
+    }
+    
+    func transitionToViewController(menuItem: NSString) {
+        
+        if menuItem == "Home" {
+            sideBar?.showSideBar(false)
+            loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
+        }
+        else if menuItem == "Profile" {
+            
+        }
+        else if menuItem == "Mentions" {
+            
+        }
+    }
+   
 }

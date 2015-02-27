@@ -52,6 +52,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Wqd-ly-ucr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="dataSource" destination="Qhr-P3-1VF" id="PjY-rn-ebc"/>
                                     <outlet property="delegate" destination="Qhr-P3-1VF" id="Q3m-am-90i"/>
@@ -59,6 +60,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Home" id="vLg-ka-Irw">
@@ -219,6 +221,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ru-zV-my6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2058" y="500"/>
+        </scene>
+        <!--SideBarTableViewController-->
+        <scene sceneID="R6E-Ha-Q7S">
+            <objects>
+                <tableViewController title="SideBarTableViewController" id="eGx-2O-c9D" customClass="SideBarTableViewController" customModule="twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bd4-LZ-J3X">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WnD-Qa-E4V">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WnD-Qa-E4V" id="cAP-y9-2ay">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="eGx-2O-c9D" id="XlG-2d-tES"/>
+                            <outlet property="delegate" destination="eGx-2O-c9D" id="lKo-tF-p07"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Bo-ay-zGK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-314" y="-936"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VfV-On-gNp">

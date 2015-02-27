@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -21,8 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if User.currentUser != nil {
             println("current user detected")
-            var tvc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
+            var tvc = mainStoryboard.instantiateViewControllerWithIdentifier("TweetsViewController") as TweetsViewController
             let navigationController = UINavigationController(rootViewController: tvc)
+            
             window?.rootViewController = navigationController
         }
         
@@ -66,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func userDidLogout() {
-        var vc = storyboard.instantiateInitialViewController() as UIViewController
+        var vc = mainStoryboard.instantiateInitialViewController() as UIViewController
         //let navigationController = UINavigationController(rootViewController: vc)
         self.window?.rootViewController = vc
     }

@@ -17,6 +17,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     var user : User?
     var delegate : ComposeViewControllerDelegate?
     var tweet: Tweet?
+    //var sideBar:SideBar?
     
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var screenName: UILabel!
@@ -54,6 +55,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         tweetCharCount.hidden = true
         tweetText.delegate = self
+        
+        //viewDidLoadRedux()
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,4 +91,14 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         }
     }
 
+    /*func viewDidLoadRedux() {
+        println("view did load redux")
+        sideBar = SideBar(sourceView: self.view,  menuItems: ["First", "Second", "Third"])
+        sideBar!.delegate = self
+    }
+    
+    func sideBarDidSelectButtonAtIndex(index: Int) {
+        println("side bar did select")
+    }*/
+    
 }

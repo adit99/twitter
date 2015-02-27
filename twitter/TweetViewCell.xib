@@ -95,6 +95,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <gestureRecognizers/>
             <connections>
                 <outlet property="createdAtLabel" destination="O79-uV-TVL" id="E5j-8w-7Bd"/>
                 <outlet property="favoriteLabel" destination="GLC-84-q7Q" id="6Xr-95-aRh"/>
