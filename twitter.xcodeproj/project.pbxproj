@@ -22,9 +22,7 @@
 		BE3D5B411A9FE03A0089D409 /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D5B401A9FE03A0089D409 /* SideBarTableViewController.swift */; };
 		BE3D5B431A9FE2CE0089D409 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D5B421A9FE2CE0089D409 /* SideBar.swift */; };
 		BE549B271AA30839004BD3CC /* MentionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE549B261AA30839004BD3CC /* MentionsViewController.swift */; };
-		BE67BE961AA0CFEC00DDA087 /* PageMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE67BE951AA0CFEC00DDA087 /* PageMenuController.swift */; };
 		BE6C098A1AA03FB80029B735 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C09891AA03FB80029B735 /* ProfileViewController.swift */; };
-		BE6E16FE1AA1294D00874932 /* PageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6E16FD1AA1294D00874932 /* PageMenu.swift */; };
 		BEA0BEEC1A96FD090036C45C /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0BEEB1A96FD090036C45C /* TweetsViewController.swift */; };
 		BEA0BEF01A970BB60036C45C /* TweetViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0BEEE1A970BB60036C45C /* TweetViewCell.swift */; };
 		BEA0BEF11A970BB60036C45C /* TweetViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEA0BEEF1A970BB60036C45C /* TweetViewCell.xib */; };
@@ -74,9 +72,7 @@
 		BE3D5B401A9FE03A0089D409 /* SideBarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
 		BE3D5B421A9FE2CE0089D409 /* SideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		BE549B261AA30839004BD3CC /* MentionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsViewController.swift; sourceTree = "<group>"; };
-		BE67BE951AA0CFEC00DDA087 /* PageMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuController.swift; sourceTree = "<group>"; };
 		BE6C09891AA03FB80029B735 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		BE6E16FD1AA1294D00874932 /* PageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenu.swift; sourceTree = "<group>"; };
 		BEA0BEEB1A96FD090036C45C /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		BEA0BEEE1A970BB60036C45C /* TweetViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewCell.swift; sourceTree = "<group>"; };
 		BEA0BEEF1A970BB60036C45C /* TweetViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetViewCell.xib; sourceTree = "<group>"; };
@@ -214,8 +210,6 @@
 				BE0080611A9A6147007A0BD7 /* TapGestureController.swift */,
 				BE3D5B401A9FE03A0089D409 /* SideBarTableViewController.swift */,
 				BE6C09891AA03FB80029B735 /* ProfileViewController.swift */,
-				BE67BE951AA0CFEC00DDA087 /* PageMenuController.swift */,
-				BE6E16FD1AA1294D00874932 /* PageMenu.swift */,
 				BE549B261AA30839004BD3CC /* MentionsViewController.swift */,
 			);
 			name = Controllers;
@@ -393,12 +387,10 @@
 				BEA0BEF01A970BB60036C45C /* TweetViewCell.swift in Sources */,
 				BEA0BEFB1A9948C30036C45C /* TweetDetailsViewController.swift in Sources */,
 				BEF79C001A99689900BCC455 /* ComposeViewController.swift in Sources */,
-				BE67BE961AA0CFEC00DDA087 /* PageMenuController.swift in Sources */,
 				BE3D5B431A9FE2CE0089D409 /* SideBar.swift in Sources */,
 				BEC2E1C91AA28B1F0090BDD2 /* FadeAnimation.swift in Sources */,
 				BE2454E91A94371800E1D31F /* ViewController.swift in Sources */,
 				BEA0BEF71A990A7C0036C45C /* Images.swift in Sources */,
-				BE6E16FE1AA1294D00874932 /* PageMenu.swift in Sources */,
 				BE6C098A1AA03FB80029B735 /* ProfileViewController.swift in Sources */,
 				BE2454E71A94371800E1D31F /* AppDelegate.swift in Sources */,
 				BEC2E1C71AA27D1A0090BDD2 /* ContextLabel.swift in Sources */,

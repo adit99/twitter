@@ -60,8 +60,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tweetsLabel.text = numberToDisplay(user.tweets!)
     
         //background image
-        let background_url = NSURL(string: user.backgroundImageURL!)
-        self.backgroundImageView.setImageWithURL(background_url)
+        let banner = (user.profileBannerURL != nil) ? NSURL(string: user.profileBannerURL!) : NSURL(string: user.backgroundImageURL!)
+
+        self.backgroundImageView.setImageWithURL(banner)
         
         //profile image
         let profile_url = NSURL(string: user.profileImageURL!)
@@ -94,9 +95,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if sender.currentPage == 1 {
 
-            let blurView:UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
-            blurView.frame = backgroundImageView.bounds
-            backgroundImageView.addSubview(blurView)
+            UIView.animateWithDuration(1.2) {
+                let blurView:UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+                blurView.frame = self.backgroundImageView.bounds
+                self.backgroundImageView.addSubview(blurView)
+            }
         }
         
             
@@ -107,17 +110,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 contextLabel.text = self.user.tagLine!
                 self.userName.attributedText = contextLabel.attributedText
                 self.userName.font = UIFont.systemFontOfSize(14.0)
-
-                let blurView:UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
-                blurView.frame = self.backgroundImageView.bounds
-                self.backgroundImageView.addSubview(blurView)
                 
             } else if sender.currentPage == 0 {
                 self.userName.text = self.user.name!
-                for view in self.backgroundImageView.subviews {
-                    view.removeFromSuperview()
-                }
                 
+                UIView.animateWithDuration(1.2) {
+                    for view in self.backgroundImageView.subviews {
+                        view.removeFromSuperview()
+                    }
+                }
             }
             self.userName.fadeIn()
         })
