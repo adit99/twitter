@@ -27,5 +27,5 @@ Time spent: `12`
 
 
 ### Walkthrough
-
+![alt tag](https://github.com/adit99/twitter/blob/master/redux_demo.gif)
 
