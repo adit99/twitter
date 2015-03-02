@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetViewCell: UITableViewCell {
+class TweetViewCell: UITableViewCell, ContextLabelDelegate {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var userLabel: UILabel!
@@ -32,17 +32,23 @@ class TweetViewCell: UITableViewCell {
         //labels
         userLabel.text = tweet.user!.name
         handleLabel.text = "@\(tweet.user!.screenName!)"
-        tweetLabel.text = tweet.text
         createdAtLabel.text = Tweet.timeSinceTweet(tweet.createdAt!)
+        
+        //tweet label
+        let contextLabel = ContextLabel()
+        contextLabel.text = tweet.text
+        contextLabel.delegate = self
+        tweetLabel.attributedText = contextLabel.attributedText
+        tweetLabel.font = UIFont.systemFontOfSize(12.0)
         
         //images
         favoriteLabel.image = (tweet.favorited! == 0) ? ImageAssets.Instance.defaultFavoriteImage!.image :ImageAssets.Instance.onFavoriteImage!.image
-        favoriteLabel.accessibilityIdentifier = (tweet.favorited! == 0) ? "default" : "on"
+        favoriteLabel.highlighted = (tweet.favorited! == 0) ? false : true
         
         replyImage.image = ImageAssets.Instance.defaultReplyImage!.image
         
         retweetImage.image = (tweet.retweeted! == 0)  ? ImageAssets.Instance.defaultRetweetImage!.image : ImageAssets.Instance.onRetweetImage!.image
-        retweetImage.accessibilityIdentifier = (tweet.retweeted! == 0) ? "default" : "on"
+        retweetImage.highlighted = (tweet.retweeted! == 0) ? false : true
     }
     
     func setProfileImage(imageURL: NSString!) {
@@ -61,6 +67,23 @@ class TweetViewCell: UITableViewCell {
     override  func layoutSubviews() {
         super.layoutSubviews()
         self.tweetLabel.preferredMaxLayoutWidth = self.tweetLabel.frame.size.width
+    }
+    
+    func contextLabel(contextLabel: ContextLabel, beganTouchOf text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "beganTouchOf: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("began touches of \(text)")
+    }
+    
+    func contextLabel(contextLabel: ContextLabel, movedTouchTo text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "movedTouchTo: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("movedTouchTo \(text)")
+
+    }
+    
+    func contextLabel(contextLabel: ContextLabel, endedTouchOf text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "endedTouchOf: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("endedTouchOf \(text)")
+
     }
     
 }

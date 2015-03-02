@@ -23,6 +23,7 @@ class User: NSObject {
     var tweets: Int?
     var followingCount: Int?
     var location: NSString?
+    var id : NSString?
 
     init(dictionary: NSDictionary) {
         self.name = dictionary["name"] as? NSString
@@ -34,7 +35,7 @@ class User: NSObject {
         self.followingCount = dictionary["friends_count"] as? Int
         self.tagLine = dictionary["description"] as? NSString
         self.location = dictionary["location"] as? NSString
-        
+        self.id = dictionary["id_str"] as? NSString
         self.dictionary = dictionary
     }
     
@@ -82,14 +83,28 @@ class User: NSObject {
         
         var parameters = NSMutableDictionary()
         parameters["screen_name"] = screenName
-        parameters["since_id"] = sinceID
+        //parameters["since_id"] = sinceID
         
-        CodePathTwitterClient.Instance.GET("1.1/statuses/user_timeline.json", parameters: (parameters["since_id"] as NSString != "") ? parameters : nil, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        CodePathTwitterClient.Instance.GET("1.1/statuses/user_timeline.json", parameters: parameters, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             println("got user timeline")
             var tweets = Tweet.tweetsWithArray(response as [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                println("error getting home timeline")
+                println("error getting user timeline")
+                completion(tweets: [Tweet](), error: error)
+        })
+        
+    }
+    
+    
+    func mentionsTimelineWithCompletion(completion: (tweets: [Tweet], error: NSError?) -> ()) {
+        
+        CodePathTwitterClient.Instance.GET("1.1/statuses/mentions_timeline.json", parameters: nil, success: {(operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            println("got user mentions timeline")
+            var tweets = Tweet.tweetsWithArray(response as [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println("error getting user mentions timeline")
                 completion(tweets: [Tweet](), error: error)
         })
         

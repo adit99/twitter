@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetDetailsTopCell: UITableViewCell {
+class TweetDetailsTopCell: UITableViewCell, ContextLabelDelegate {
 
    
     //@IBOutlet weak var retweetUserLabel: UILabel!
@@ -19,7 +19,7 @@ class TweetDetailsTopCell: UITableViewCell {
     @IBOutlet weak var profileScreenName: UILabel!
     
     //@IBOutlet weak var tweetLabel: UILabel!
-    @IBOutlet weak var tweetLabel: TTTAttributedLabel!
+    @IBOutlet weak var tweetLabel: UILabel!
     
     @IBOutlet weak var retweetsLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
@@ -32,8 +32,6 @@ class TweetDetailsTopCell: UITableViewCell {
         super.awakeFromNib()
         self.tweetLabel.preferredMaxLayoutWidth = self.tweetLabel.frame.size.width
         // Initialization code
-        
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -52,8 +50,12 @@ class TweetDetailsTopCell: UITableViewCell {
         //labels
         profileNameLabel.text = tweet.user!.name
         profileScreenName.text = "@\(tweet.user!.screenName!)"
-        tweetLabel.text = tweet.text
-
+        
+        //tweet label with attributes
+        let contextLabel = ContextLabel()
+        contextLabel.text = tweet.text
+        contextLabel.delegate = self
+        tweetLabel.attributedText = contextLabel.attributedText
 
         //images
         favoriteImage.image = (tweet.favorited! == 0) ? ImageAssets.Instance.defaultFavoriteImage!.image :ImageAssets.Instance.onFavoriteImage!.image
@@ -64,21 +66,9 @@ class TweetDetailsTopCell: UITableViewCell {
         retweetTweetImage.image = (tweet.retweeted! == 0)  ? ImageAssets.Instance.defaultRetweetImage!.image : ImageAssets.Instance.onRetweetImage!.image
         retweetTweetImage.highlighted = (tweet.retweeted! == 0) ? false : true
         
-        //retweetUserImage.image = ImageAssets.Instance.defaultRetweetImage!.image
-
         //favorite and retweet counts
         favoritesLabel.text = "\(tweet.favoriteCount!.description) favorites"
         retweetsLabel.text = "\(tweet.retweetCount!.description) retweets"
-        
-        /*tweetLabel.text = tweet.text
-        tweetLabel.setText(<#text: AnyObject!#>, afterInheritingLabelAttributesAndConfiguringWithBlock: <#((NSMutableAttributedString!) -> NSMutableAttributedString!)!##(NSMutableAttributedString!) -> NSMutableAttributedString!#>)
-        
-        let linkColor = UIColor(red: 0.203, green: 0.329, blue: 0.835, alpha: 1)
-        let linkActiveColor = UIColor.blackColor()
-                
-        tweetLabel.linkAttributes = [NSForegroundColorAttributeName : linkColor]
-        tweetLabel.activeLinkAttributes = [NSForegroundColorAttributeName : linkActiveColor]
-        tweetLabel.enabledTextCheckingTypes = NSTextCheckingType.Link.rawValue*/
     }
     
     func setProfileImage(imageURL: NSString!) {
@@ -92,5 +82,21 @@ class TweetDetailsTopCell: UITableViewCell {
         self.tweetLabel.preferredMaxLayoutWidth = self.tweetLabel.frame.size.width
     }
     
+    func contextLabel(contextLabel: ContextLabel, beganTouchOf text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "beganTouchOf: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("began touches of \(text)")
+    }
+    
+    func contextLabel(contextLabel: ContextLabel, movedTouchTo text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "movedTouchTo: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("movedTouchTo \(text)")
+        
+    }
+    
+    func contextLabel(contextLabel: ContextLabel, endedTouchOf text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "endedTouchOf: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("endedTouchOf \(text)")
+        
+    }
 
 }

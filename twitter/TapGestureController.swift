@@ -20,7 +20,7 @@ class TapGestureController : UIViewController {
         
         var favoriteImageView = gesture.view! as UIImageView
         
-        println("Current State : \(favoriteImageView.accessibilityIdentifier)")
+        println("Current State : \(favoriteImageView.highlighted)")
         
         switch favoriteImageView.highlighted {
             case false:
@@ -79,7 +79,7 @@ class TapGestureController : UIViewController {
         
         var retweetImageView = gesture.view! as UIImageView
         
-        println("Current State : \(retweetImageView.accessibilityIdentifier)")
+        println("Current State : \(retweetImageView.highlighted)")
         
         switch retweetImageView.highlighted {
         case false:

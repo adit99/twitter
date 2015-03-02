@@ -52,6 +52,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         viewDidLoadRedux()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        sideBar?.showSideBar(false)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         println("view did appear")
         super.viewDidAppear(animated)
@@ -61,6 +66,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetViewCell") as TweetViewCell
         cell.loadCellContents(self.tweets![indexPath.row])
+        
+        ImageAssets.Instance.addTapGestureForImageView(&(cell.profileImage!), target: self, selector: "profileTapped:")
+        cell.profileImage!.tag = indexPath.row
         
         ImageAssets.Instance.addTapGestureForImageView(&(cell.replyImage!), target: self, selector: "replyTapped:")
         cell.replyImage!.tag = indexPath.row
@@ -114,6 +122,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             composeVC.tweet = tweet
             composeVC.delegate = self
         }
+        else if (segue.identifier! == "gotoprofile") {
+            let profileVC = segue.destinationViewController as ProfileViewController
+            profileVC.user = sender as User
+        }
     }
     
     @IBAction func onLogout(sender: AnyObject) {
@@ -161,6 +173,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         println("favorite tapped")
         tapCtrl!.handleFavorite(gesture, sender: self, tweet: self.tweets![(gesture.view as UIImageView).tag])
     }
+   
+    func profileTapped(gesture: UITapGestureRecognizer) {
+        println("profile tapped")
+        var profileView = gesture.view as UIImageView
+        self.performSegueWithIdentifier("gotoprofile", sender: self.tweets![profileView.tag].user!)
+    }
     
     func loadHomeTimeline(sinceID : NSString = "") {
         println("load home timeline since \(sinceID)")
@@ -207,10 +225,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             loadHomeTimeline(sinceID: self.tweets![0].tweetID!)
         }
         else if menuItem == "Profile" {
-            self.performSegueWithIdentifier("gotoprofile", sender: self)
+            self.performSegueWithIdentifier("gotoprofile", sender: User.currentUser!)
         }
         else if menuItem == "Mentions" {
-            
+            self.performSegueWithIdentifier("gotomentions", sender: User.currentUser)
         }
     }
    

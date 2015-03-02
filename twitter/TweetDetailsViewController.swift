@@ -49,7 +49,7 @@ class TweetDetailsViewController:  UIViewController, UITableViewDataSource, UITa
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetDetailsTopCell") as TweetDetailsTopCell
         cell.loadCellContents(self.tweet!)
         
-        /*tapCtrl!.addTapGestureForImageViews(&(cell.replyImage!), retweetView: &(cell.retweetTweetImage!), favoriteView: &(cell.favoriteImage!))*/
+       // ImageAssets.Instance.addTapGestureForImageView(&(cell.profileImage!), target: self, selector: "profileTapped:")
         
         ImageAssets.Instance.addTapGestureForImageView(&(cell.replyImage!), target: self, selector: "replyTapped:")
         

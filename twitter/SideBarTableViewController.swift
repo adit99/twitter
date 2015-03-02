@@ -55,8 +55,9 @@ class SideBarTableViewController: UITableViewController {
 
         var cell = UITableViewCell()
         cell.backgroundColor = UIColor.clearColor()
-        cell.textLabel!.textColor = UIColor(CIColor: CIColor(red: 85/255, green: 172/255, blue: 238/255))
-
+        //cell.textLabel!.textColor = UIColor(CIColor: CIColor(red: 85/255, green: 172/255, blue: 238/255))
+        cell.textLabel!.textColor = UIColor.whiteColor()
+        
         let selectedView:UIView = UIView(frame: CGRect(x:0, y:0, width: cell.frame.size.width, height: cell.frame.size.height))
         selectedView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
             
@@ -68,7 +69,8 @@ class SideBarTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80.0
+        let height:CGFloat = self.view.frame.size.height / CGFloat(tableData.count)
+        return height
     }
     
     /*override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

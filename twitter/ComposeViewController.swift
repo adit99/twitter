@@ -12,7 +12,7 @@ protocol ComposeViewControllerDelegate {
     func didTweetSuceed(sender: ComposeViewController)
 }
 
-class ComposeViewController: UIViewController, UITextViewDelegate {
+class ComposeViewController: UIViewController, UITextViewDelegate, ContextLabelDelegate {
 
     var user : User?
     var delegate : ComposeViewControllerDelegate?
@@ -41,7 +41,12 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             userName.text = twt.user!.name!
             screenName.text = "@\(twt.user!.screenName!)"
             tweetLabel.hidden = false
-            tweetLabel.text = twt.text!
+            
+            //tweet label
+            let contextLabel = ContextLabel()
+            contextLabel.text = twt.text!
+            tweetLabel.attributedText = contextLabel.attributedText
+            
             println(twt.text!)
             tweetText.text = "@\(twt.user!.screenName!)"
             let url = NSURL(string: twt.user!.profileImageURL!)
@@ -91,14 +96,21 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         }
     }
 
-    /*func viewDidLoadRedux() {
-        println("view did load redux")
-        sideBar = SideBar(sourceView: self.view,  menuItems: ["First", "Second", "Third"])
-        sideBar!.delegate = self
+    func contextLabel(contextLabel: ContextLabel, beganTouchOf text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "beganTouchOf: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("began touches of \(text)")
     }
     
-    func sideBarDidSelectButtonAtIndex(index: Int) {
-        println("side bar did select")
-    }*/
+    func contextLabel(contextLabel: ContextLabel, movedTouchTo text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "movedTouchTo: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("movedTouchTo \(text)")
+        
+    }
+    
+    func contextLabel(contextLabel: ContextLabel, endedTouchOf text: String, with linkRangeResult: LinkRangeResult) {
+        //tweetLabel.text = "endedTouchOf: \(text)" + "\nRange: \(linkRangeResult.linkRange)"
+        println("endedTouchOf \(text)")
+        
+    }
     
 }

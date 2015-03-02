@@ -55,9 +55,11 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate, UIGestureRecognizer
     func setupSideBar() {
         sideBarContainerView.frame = CGRectMake(-barWidth-1, originView.frame.origin.y, barWidth, originView.frame.size.height)
         sideBarContainerView.clipsToBounds = false
-        sideBarContainerView.backgroundColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.8)
-        originView.addSubview(sideBarContainerView)
+        //sideBarContainerView.backgroundColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.8)
         
+        sideBarContainerView.backgroundColor = UIColor(CIColor: CIColor(red: 85/255, green: 172/255, blue: 238/255)).colorWithAlphaComponent(0.6)
+        
+        originView.addSubview(sideBarContainerView)
         
         let blurView:UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
         blurView.frame = sideBarContainerView.frame
@@ -67,7 +69,10 @@ class SideBar: NSObject, SideBarTableViewControllerDelegate, UIGestureRecognizer
         sideBarTableViewController.tableView.frame = sideBarContainerView.bounds
         sideBarTableViewController.tableView.clipsToBounds = false
         sideBarTableViewController.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        sideBarTableViewController.tableView.backgroundColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.8)
+      //  sideBarTableViewController.tableView.backgroundColor = UIColor.darkGrayColor().colorWithAlphaComponent(0.8)
+        
+        sideBarTableViewController.tableView.backgroundColor = UIColor(CIColor: CIColor(red: 85/255, green: 172/255, blue: 238/255)).colorWithAlphaComponent(0.6)
+
         sideBarTableViewController.tableView.scrollsToTop = false
         sideBarTableViewController.tableView.contentInset = UIEdgeInsetsMake(sideBarTableViewTopInset, 0, 0, 0)
         
