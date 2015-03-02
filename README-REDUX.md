@@ -7,12 +7,12 @@ Time spent: `12`
 
 #### Required
 
-- [x] Hamburger menu
+- [x] <b>Hamburger menu</b>
  - [x] Dragging anywhere in the view should reveal the menu.
  - [x] The menu should include links to your profile, the home timeline, and the mentions view.
  - The menu can look similar to the LinkedIn menu below or feel free to take liberty with the UI.
 
-- [x] Profile page
+- [x] <b>Profile page</b>
  - [x] Contains the user header view
  - [x] Contains a section with the users basic stats: # tweets, # following, # followers
  - [x] Optional: Implement the paging view for the user description.
@@ -20,7 +20,7 @@ Time spent: `12`
  - [ ]  Optional: Pulling down the profile page should blur and resize the header image.
 
 
-- [x] Home Timeline
+- [x] <b>Home Timeline</b>
  - [x] Tapping on a user image should bring up that user's profile page
 
 - [ ] Optional: Account switching
